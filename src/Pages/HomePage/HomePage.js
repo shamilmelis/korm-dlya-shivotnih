@@ -5,8 +5,7 @@ import Header from "../../Components/Header/Header";
 import {useState} from "react";
 import axios from "axios";
 import {styled,keyframes,css} from "styled-components";
-import ImageUndefined from '../../Components/NoImage/noimages.png'
-import {isDisabled} from "@testing-library/user-event/dist/utils";
+import ImageUndefined from '../../Components/NoImage/noimages.png';
 const HomePage = () => {
     const [products, setProducts] = useState({
         product: [],
@@ -68,11 +67,6 @@ const HomePage = () => {
         console.log(products.product)
         console.log(products.filtered_product)
         console.log(tagsArr)
-        // axios.get(`https://66bb06516a4ab5edd636e68d.mockapi.io/tovars?category}`)
-        //     .then(res => setProducts((prevState) => ({
-        //         ...prevState,
-        //         product: res.data
-        //     })))
     }
     const appear = keyframes`
      0% {opacity: 0}
