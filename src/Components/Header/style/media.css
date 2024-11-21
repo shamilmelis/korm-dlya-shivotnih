@@ -1,0 +1,42 @@
+@media screen and (max-width: 700px) {
+    .header_box {
+        flex-direction: column;
+        justify-content: flex-start;
+        max-height: 80px;
+        overflow: hidden;
+        transition: all 500ms ease;
+    }
+    .header_box.Active {
+        max-height: 300px;
+        transition: all 1500ms ease;
+    }
+    .header_searcher {
+        width: 100%;
+        margin-top: 40px;
+        margin-bottom: 10px;
+    }
+    .header_logo {
+        width: 100%;
+    }
+    .header_burger {
+        display: block;
+    }
+    .bucket_popup_box {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .product_card_img {
+        max-width: 80px;
+        max-height: 80px;
+    }
+}
+
+
+@media screen and (max-width: 340px) {
+    .product_card_img {
+        max-width: 60px;
+        max-height: 60px;
+    }
+}

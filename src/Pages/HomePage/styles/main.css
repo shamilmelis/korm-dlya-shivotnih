@@ -1,0 +1,125 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.banner_section {
+
+}
+
+.banner_container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.banner_box {
+
+}
+
+.banner_img {
+    display: block;
+    margin: 0 auto;
+    width: 60%;
+    height: auto;
+}
+
+.filter_and_products_section {
+
+}
+
+.filter_and_products_container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.filter_and_products_box {
+    display: flex;
+}
+
+.filter_col {
+    width: 30%;
+    padding: 10px;
+}
+.products_col {
+    width: 70%;
+    padding: 5px;
+}
+
+.filter_box {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter_box_inner {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.filter_tag {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid gainsboro;
+}
+
+.tag_button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.products_box {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.tovar_col {
+    flex-basis: 33.333%;
+    transition: 1s;
+    padding: 1px;
+}
+.tovar_box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    height: 100%;
+    border: 1px solid gainsboro;
+}
+
+.tovar_img {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+}
+
+.tovar_inform {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-grow: 1;
+}
+
+.tovar_price {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-grow: 1;
+}
+
+.addToBucket_btn {
+    cursor: pointer;
+}
