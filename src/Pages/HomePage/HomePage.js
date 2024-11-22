@@ -35,6 +35,7 @@ const HomePage = () => {
             product_title: title,
             product_descr: descr,
             product_price: price,
+            product_initial_price: price,
             product_id: id,
             count: 1,
         })

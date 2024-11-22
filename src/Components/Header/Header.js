@@ -26,7 +26,7 @@ const Header = ({prodo, mainState, mainSetState}) => {
         // const prevItem = isBucket.map(item => item.product_id === id ? {...item, count: item.count += 1} : item)
         setIsBucket((prevState) =>
             prevState.map((item) =>
-                item.product_id === id ? {...item, count: item.count += 1} : item
+                item.product_id === id ? {...item, count: item.count += 1, product_price: item.product_price += item.product_initial_price} : item
             )
         )
     }
@@ -34,7 +34,7 @@ const Header = ({prodo, mainState, mainSetState}) => {
         // const prevItem = isBucket.map(item => item.product_id === id ? {...item, count: item.count -= 1} : item)
         setIsBucket(prevItem =>
             prevItem.map(item =>
-                item.count === 1 ? item.product_id === id ? {...item, count: item.count = 1} : item : item.product_id === id ? {...item, count: item.count -= 1} : item
+                item.count === 1 ? item.product_id === id ? {...item, count: item.count = 1} : item : item.product_id === id ? {...item, count: item.count -= 1, product_price: item.product_price -= item.product_initial_price} : item
             )
         )
     }
@@ -55,9 +55,12 @@ const Header = ({prodo, mainState, mainSetState}) => {
                     <div className={isBurger === false ? 'header_box' : 'header_box Active'}>
                         <div className={'header_logo'}>
                             <h1 className={'header_title'}>AnimalFOOD</h1>
+                            <div className={'bucket_counter'}>
+                                <button className={'bucket_btn'} onClick={() => setIsPopup(true)}><i className="fa-solid fa-cart-shopping"></i></button>
+                                <span className={isBucket.length === 0 ? 'bucket_counter_span' : 'bucket_counter_span Active'}></span>
+                            </div>
                             <button className={'header_burger'} onClick={() => setIsBurger(!isBurger)}>=</button>
                         </div>
-                        <button className={'bucket_btn'} onClick={() => setIsPopup(true)}><i className="fa-solid fa-cart-shopping"></i></button>
                         <div className={'header_searcher'}>
                             <input type="text" placeholder={'Найти товар'} className={'search_input'}/>
                             <button className={'search_button'}>найти</button>

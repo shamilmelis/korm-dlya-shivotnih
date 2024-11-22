@@ -26,6 +26,23 @@
     }
 }
 
+@media screen and (max-width: 650px) {
+    .product_card {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .product_card_inner {
+        width: 100%;
+    }
+    .product_card_count_inner {
+        width: 100%;
+    }
+    .product_card_inner_price {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
 @media screen and (max-width: 600px) {
     .product_card_img {
         max-width: 80px;
