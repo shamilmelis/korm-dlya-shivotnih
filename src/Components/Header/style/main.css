@@ -2,30 +2,16 @@
     overflow: hidden;
 }
 
-header {
-
-}
-
-@keyframes disappearPopup {
-    0% {opacity: 1; display: flex}
-    100% {opacity: 0; display: none}
-}
-
-@keyframes appearPopup {
-    0% {opacity: 0; display: none}
-    100% {opacity: 1; display: flex}
-}
-
 .bucket_popup.Active {
-    animation: appearPopup 0.4s forwards;
+    display: flex;
 }
 .bucket_popup {
+    display: none;
     position: fixed;
     right: 0;
     left: 0;
     top: 0;
     bottom: 0;
-    animation: disappearPopup 0.4s forwards;
     justify-content: center;
     align-items: center;
     width: 100%;
