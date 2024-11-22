@@ -54,7 +54,7 @@ const Header = ({prodo, mainState, mainSetState}) => {
                 <div className={'header_container'}>
                     <div className={isBurger === false ? 'header_box' : 'header_box Active'}>
                         <div className={'header_logo'}>
-                            <h1 className={'header_title'}>AnimalFOOD</h1>
+                            <h1 className={'header_title'}>AnimalMEAL</h1>
                             <div className={'bucket_counter'}>
                                 <button className={'bucket_btn'} onClick={() => setIsPopup(true)}><i className="fa-solid fa-cart-shopping"></i></button>
                                 <span className={isBucket.length === 0 ? 'bucket_counter_span' : 'bucket_counter_span Active'}></span>
