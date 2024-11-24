@@ -6,6 +6,9 @@ import {useState} from "react";
 import axios from "axios";
 import {styled,keyframes,css} from "styled-components";
 import ImageUndefined from '../../Components/NoImage/noimages.png';
+import {useSelector, useDispatch} from "react-redux";
+import {setBucketData, setData, setFilteredData} from "../../Redux/slices/dataSlice";
+
 const HomePage = () => {
     const [products, setProducts] = useState({
         product: [],
@@ -13,7 +16,11 @@ const HomePage = () => {
     })
     const [tagsArr, setTagsArr] = useState([])
     const [productToBucket, setProductToBucket] = useState([])
-
+    const [getBucket, isGetBucket] = useState([])
+    const dispatch = useDispatch();
+    const items = useSelector((state) => state.data.items)
+    const bucketItems = useSelector((state) => state.data.bucketItems)
+    const filteredItems = useSelector((state) => state.data.filteredItems)
     useEffect(() => {
         axios.get(`https://66bb06516a4ab5edd636e68d.mockapi.io/tovars`)
             .then(res => {
@@ -23,11 +30,14 @@ const HomePage = () => {
                     product: res.data,
                     filtered_product: res.data
                 }))
+                dispatch(setData(res.data))
+                dispatch(setFilteredData(res.data))
+                console.log(bucketItems)
             })
     }, [])
     useEffect(() => {
 
-    }, [products])
+    }, [products, bucketItems, filteredItems, dispatch])
 
     const putToBucket = (image,title,price,descr,id) => {
         productToBucket.push({
@@ -39,6 +49,8 @@ const HomePage = () => {
             product_id: id,
             count: 1,
         })
+        const newBucket = [...productToBucket]
+        dispatch(setBucketData(newBucket))
         setProducts((prevState) => ({
             ...prevState,
             product: products.product
@@ -61,10 +73,7 @@ const HomePage = () => {
         }
     }
     const filterArray = () => {
-        setProducts((prevState) => ({
-            ...prevState,
-            filtered_product: prevState.product.filter(el => tagsArr.includes(el.category))
-        }))
+        dispatch(setFilteredData(items.filter(el => tagsArr.includes(el.category))))
         console.log(products.product)
         console.log(products.filtered_product)
         console.log(tagsArr)
@@ -79,7 +88,13 @@ const HomePage = () => {
 
     return (
         <div>
-            <Header prodo={productToBucket} mainState={products} childState={products.product} mainSetState={setProducts}></Header>
+            <Header prodo={productToBucket}
+                    mainState={products}
+                    childState={products.product}
+                    mainSetState={setProducts}
+                    getBucket={isGetBucket}
+                    gotBucket={getBucket}
+            ></Header>
             <main>
                 <section className={'banner_section'}>
                     <div className={'banner_container'}>
@@ -148,7 +163,7 @@ const HomePage = () => {
                                 <div className={'products_box'}>
                                     {
                                         tagsArr.length === 0 ?
-                                            products.product.map(tovar => {
+                                            items.map(tovar => {
                                                 return (
                                                     <SmoothAppear className={'tovar_col'} key={tovar.id}>
                                                         <div className="tovar_box">
@@ -162,8 +177,8 @@ const HomePage = () => {
                                                                 <p>{tovar.descr}</p>
                                                                 <div className={'tovar_price'}>
                                                                     <span>{tovar.price}$</span>
-                                                                    <button className={'addToBucket_btn'} disabled={productToBucket.some(el => el.product_id === tovar.id)} onClick={(e) => putToBucket(tovar.image,tovar.title,tovar.price,tovar.descr,tovar.id)}>
-                                                                        {productToBucket.some(el => el.product_id === tovar.id) ? 'Добавлено' : 'В корзину'}
+                                                                    <button className={'addToBucket_btn'} disabled={bucketItems.some(el => el.product_id === tovar.id)} onClick={(e) => putToBucket(tovar.image,tovar.title,tovar.price,tovar.descr,tovar.id)}>
+                                                                        {bucketItems.some(el => el.product_id === tovar.id) ? 'Добавлено' : 'В корзину'}
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -171,7 +186,7 @@ const HomePage = () => {
                                                     </SmoothAppear>
                                                 )
                                             }) :
-                                            products.filtered_product.map(tovar => {
+                                            filteredItems.map(tovar => {
                                                 return (
                                                     <SmoothAppear className={'tovar_col'} key={tovar.id}>
                                                         <div className="tovar_box">
@@ -185,8 +200,8 @@ const HomePage = () => {
                                                                 <p>{tovar.descr}</p>
                                                                 <div className={'tovar_price'}>
                                                                     <span>{tovar.price}$</span>
-                                                                    <button className={'addToBucket_btn'} disabled={productToBucket.some(el => el.product_id === tovar.id)} onClick={(e) => putToBucket(tovar.image,tovar.title,tovar.price,tovar.descr,tovar.id)}>
-                                                                        {productToBucket.some(el => el.product_id === tovar.id) ? 'Добавлено' : 'В корзину'}
+                                                                    <button className={'addToBucket_btn'} disabled={bucketItems.some(el => el.product_id === tovar.id)} onClick={(e) => putToBucket(tovar.image,tovar.title,tovar.price,tovar.descr,tovar.id)}>
+                                                                        {bucketItems.some(el => el.product_id === tovar.id) ? 'Добавлено' : 'В корзину'}
                                                                     </button>
                                                                 </div>
                                                             </div>

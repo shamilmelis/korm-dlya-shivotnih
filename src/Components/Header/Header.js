@@ -4,39 +4,54 @@ import '../Header/style/media.css'
 import {useState, useEffect} from "react";
 import ImageUndefined from '../NoImage/noimages.png'
 import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {setBucketData} from "../../Redux/slices/dataSlice";
+import {setData} from "../../Redux/slices/dataSlice";
 
-
-const Header = ({prodo, mainState, mainSetState}) => {
+const Header = ({prodo, mainState, mainSetState, getBucket, gotBucket}) => {
     const [isBurger, setIsBurger] = useState(false)
     const [isPopup, setIsPopup] = useState(false)
     const [isBucket, setIsBucket] = useState([])
-
+    const dispatch = useDispatch();
+    const bucketItems = useSelector((state) => state.data.bucketItems)
+    const items = useSelector((state) => state.data.items)
     useEffect(() => {
         setIsBucket(prodo)
-    }, [isBucket, prodo])
+        console.log(bucketItems)
+    }, [isBucket, prodo, bucketItems])
     const deleteProduct = (i) => {
-       const newBucket = isBucket.splice(i, 1)
-        setIsBucket(newBucket)
-        mainSetState((prevState) => ({
-            ...prevState,
-            childState: mainState.childState
-        }))
+       const newBucket = [...bucketItems]
+        newBucket.splice(i, 1)
+        dispatch(setBucketData(newBucket))
+        dispatch(setData(items))
     }
     const plusItem = (product, id) => {
         // const prevItem = isBucket.map(item => item.product_id === id ? {...item, count: item.count += 1} : item)
-        setIsBucket((prevState) =>
-            prevState.map((item) =>
-                item.product_id === id ? {...item, count: item.count += 1, product_price: item.product_price += item.product_initial_price} : item
+        dispatch(setBucketData(
+            bucketItems.map(item =>
+                item.product_id === id
+                    ? {
+                        ...item,
+                        count: item.count + 1,
+                        product_price: item.product_price + item.product_initial_price
+                    }
+                    : item
             )
-        )
+        ))
     }
     const minusItem = (product, id) => {
         // const prevItem = isBucket.map(item => item.product_id === id ? {...item, count: item.count -= 1} : item)
-        setIsBucket(prevItem =>
-            prevItem.map(item =>
-                item.count === 1 ? item.product_id === id ? {...item, count: item.count = 1} : item : item.product_id === id ? {...item, count: item.count -= 1, product_price: item.product_price -= item.product_initial_price} : item
+        dispatch(setBucketData(
+            bucketItems.map(item =>
+                item.product_id === id
+                    ? {
+                        ...item,
+                        count: item.count === 1 ? 1 : item.count - 1,
+                        product_price: item.product_price === item.product_initial_price ? item.product_price : item.product_price - item.product_initial_price
+                    }
+                    : item
             )
-        )
+        ))
     }
 
     useEffect(() => {
@@ -57,7 +72,7 @@ const Header = ({prodo, mainState, mainSetState}) => {
                             <h1 className={'header_title'}>AnimalMEAL</h1>
                             <div className={'bucket_counter'}>
                                 <button className={'bucket_btn'} onClick={() => setIsPopup(true)}><i className="fa-solid fa-cart-shopping"></i></button>
-                                <span className={isBucket.length === 0 ? 'bucket_counter_span' : 'bucket_counter_span Active'}></span>
+                                <span className={bucketItems.length === 0 ? 'bucket_counter_span' : 'bucket_counter_span Active'}></span>
                             </div>
                             <button className={'header_burger'} onClick={() => setIsBurger(!isBurger)}>=</button>
                         </div>
@@ -76,37 +91,36 @@ const Header = ({prodo, mainState, mainSetState}) => {
                         </div>
                         <div className="inform_product">
                             {
-                              isBucket.length === 0 ?
-                                  'добавьте какой-нибудь товар':
-                                  isBucket.map((el, i) => {
-                                      return (
-                                          <div className={'product_card'} key={el.id}>
-                                              <div className={'product_card_inner'}>
-                                                  <img
-                                                      src={el.product_image.length === 0 ? ImageUndefined : el.product_image.map(el => el)}
-                                                      alt="" className={'product_card_img'}/>
-                                                  <div className={'product_card_inner_info'}>
-                                                      <span>{el.product_title.length > 40 ? el.product_title.slice(0, 40) + '...' : el.product_title}</span>
-                                                      <span>артикул: 171120240502</span>
-                                                  </div>
-                                              </div>
-                                              <div className={'product_card_count_inner'}>
-                                                  <button className={'minus_toCount_btn'} onClick={() => minusItem(el, el.product_id)}>-</button>
-                                                  <span className={'get_count_value'}>{el.count}</span>
-                                                  <button className={'plus_toCount_btn'} onClick={() => plusItem(el, el.product_id)}>+</button>
-                                              </div>
-                                              <div className={'product_card_inner_price'}>
-                                                  <span className={'product_card_price'}>{el.product_price}</span>
-                                                  <button className={'delete_card_button'} onClick={() => deleteProduct(i)}>убрать</button>
-                                              </div>
-                                          </div>
-                                      )
-                                  })
+                                bucketItems.length === 0 ? 'Добавьте товары!' :
+                                    bucketItems.map((el, i) => {
+                                        return (
+                                            <div className={'product_card'} key={el.id}>
+                                                <div className={'product_card_inner'}>
+                                                    <img
+                                                        src={el.product_image.length === 0 ? ImageUndefined : el.product_image.map(el => el)}
+                                                        alt="" className={'product_card_img'}/>
+                                                    <div className={'product_card_inner_info'}>
+                                                        <span>{el.product_title.length > 40 ? el.product_title.slice(0, 40) + '...' : el.product_title}</span>
+                                                        <span>артикул: 171120240502</span>
+                                                    </div>
+                                                </div>
+                                                <div className={'product_card_count_inner'}>
+                                                    <button className={'minus_toCount_btn'} onClick={() => minusItem(el, el.product_id)}>-</button>
+                                                    <span className={'get_count_value'}>{el.count}</span>
+                                                    <button className={'plus_toCount_btn'} onClick={() => plusItem(el, el.product_id)}>+</button>
+                                                </div>
+                                                <div className={'product_card_inner_price'}>
+                                                    <span className={'product_card_price'}>{el.product_price}</span>
+                                                    <button className={'delete_card_button'} onClick={() => deleteProduct(i)}>убрать</button>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
                             }
 
                         </div>
                         <div className={'confirm_product'}>
-                            <Link to={'/confirm-order'} bucket={isBucket} className={'confirm_order_btn'}>Оформить</Link>
+                            {bucketItems.length === 0 ? 'Добавьте товар!' : <Link to={'/confirm-order'} className={'confirm_order_btn'} onClick={() => getBucket(isBucket) && console.log(gotBucket)}>Оформить</Link>}
                         </div>
                     </div>
                 </div>

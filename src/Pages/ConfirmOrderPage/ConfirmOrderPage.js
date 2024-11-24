@@ -6,7 +6,13 @@ const ConfirmOrderPage = () => {
     return (
         <div>
             <Header></Header>
-            123
+            <main>
+                <section className={'confirm_order_section'}>
+                    <div className="confirm_order_container">
+                        Номер заказа: #44
+                    </div>
+                </section>
+            </main>
         </div>
     )
 }
