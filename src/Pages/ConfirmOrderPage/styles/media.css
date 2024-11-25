@@ -1,0 +1,13 @@
+@media screen and (max-width: 800px) {
+    .confirm_order_user_fio_col {
+        flex-basis: 100%;
+        transition: 1s ease-out;
+    }
+    .confirm_order_user_bucket_col {
+        flex-basis: 100%;
+        transition: 1s ease-out;
+    }
+    .confirm_order_row {
+        flex-wrap: wrap;
+    }
+}

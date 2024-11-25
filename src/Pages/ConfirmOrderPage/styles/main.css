@@ -2,7 +2,303 @@
 
 }
 
+* {
+    border: px solid black;
+}
+
 .confirm_order_container {
     max-width: 1200px;
     margin: 0 auto;
+}
+
+.confirm_order_box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+}
+
+.back_to_previous_page_btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    padding: 10px;
+    color: orange;
+    font-size: 17px;
+    border-radius: 10px;
+}
+
+.confirm_order_row {
+    display: flex;
+    gap: 20px;
+}
+
+.confirm_order_user_fio_col {
+    flex-basis: 50%;
+    transition: 1s ease-out;
+}
+
+.confirm_order_user_fio_box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.user_fio_inner {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-bottom: 2px solid #e5e4e2;
+    padding-bottom: 20px;
+}
+
+.user_fio_inner_box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user_fio_commit_box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user_place_inner {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-bottom: 2px solid #e5e4e2;
+    padding-bottom: 20px;
+}
+
+.user_place_inner_box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.user_place_inner_list {
+    position: relative;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.user_place_inner_list_box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.user_adress_inner {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.user_adress_inner_box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.confirm_order_title {
+    font-family: 'Inter', sans-serif;
+    font-size: 25px;
+}
+
+.personal_info_span {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: green;
+}
+
+.information_extra_span {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+}
+
+.user_info_input {
+    padding: 15px;
+    border-radius: 0.6em;
+    background: #e5e4e2;
+    border: none;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+}
+
+.commit_politics_span {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.delivery_span {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: green;
+}
+
+.delivery_value {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+}
+.typeOfDelivery_span.Disabled {color: gainsboro}
+.typeOfDelivery_span {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    transition: 0.3s ease-in-out;
+}
+
+.priceOfDelivery_span.Disabled {color: gainsboro}
+.priceOfDelivery_span {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    transition: 0.3s ease-in-out;
+}
+.timeOfDelivery_span.Disabled {color: gray}
+.timeOfDelivery_span {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: #000;
+    transition: 0.3s ease-in-out;
+}
+
+.select_typeOfDelivery_btn {
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: none;
+    position: absolute;
+    z-index: 3;
+    cursor: pointer;
+}
+
+.personal_adress_span {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: green;
+}
+
+.user_city_span {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    flex-grow: 1;
+}
+
+.change_city_btn {
+    cursor: pointer;
+    background: none;
+    text-decoration: underline;
+    color: green;
+    border: none;
+}
+
+.confirm_order_user_bucket_col {
+    flex-basis: 50%;
+    transition: 1s ease-out;
+}
+
+.confirm_order_user_bucket_box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.confirm_order_user_bucket_inner {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.this_order {
+    display: flex;
+    gap: 10px;
+    border-bottom: 2px solid #e5e4e2;
+    padding-bottom: 20px;
+}
+
+.this_order_image {
+    width: 70px;
+    height: 70px;
+    background: #e5e4e2;
+    border-radius: 10px;
+}
+
+.this_order_info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.this_order_actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.this_order_title {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.this_order_price {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.this_order_count {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.to_minus_count_btn {
+    cursor: pointer;
+    padding: 5px 10px;
+    border: none;
+    background: #adadc9;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    border-radius: 5px;
+}
+
+.count_value {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.to_plus_count_btn {
+    cursor: pointer;
+    padding: 5px 10px;
+    border: none;
+    background: #adadc9;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    border-radius: 5px;
+}
+
+.delete_this_order_btn {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 20px;
+}
+
+.user_adress_location_span i {
+    color: red;
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import '../Header/style/main.css'
 import '../Header/style/media.css'
 import {useState, useEffect} from "react";
+import {useLocation} from "react-router-dom";
 import ImageUndefined from '../NoImage/noimages.png'
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
@@ -15,6 +16,8 @@ const Header = ({prodo, mainState, mainSetState, getBucket, gotBucket}) => {
     const dispatch = useDispatch();
     const bucketItems = useSelector((state) => state.data.bucketItems)
     const items = useSelector((state) => state.data.items)
+    let location = useLocation()
+
     useEffect(() => {
         setIsBucket(prodo)
         console.log(bucketItems)
@@ -38,6 +41,7 @@ const Header = ({prodo, mainState, mainSetState, getBucket, gotBucket}) => {
                     : item
             )
         ))
+        console.log(location)
     }
     const minusItem = (product, id) => {
         // const prevItem = isBucket.map(item => item.product_id === id ? {...item, count: item.count -= 1} : item)
@@ -70,10 +74,10 @@ const Header = ({prodo, mainState, mainSetState, getBucket, gotBucket}) => {
                     <div className={isBurger === false ? 'header_box' : 'header_box Active'}>
                         <div className={'header_logo'}>
                             <h1 className={'header_title'}>AnimalMEAL</h1>
-                            <div className={'bucket_counter'}>
+                            {location.pathname === '/confirm-order' ? '' : <div className={'bucket_counter'}>
                                 <button className={'bucket_btn'} onClick={() => setIsPopup(true)}><i className="fa-solid fa-cart-shopping"></i></button>
                                 <span className={bucketItems.length === 0 ? 'bucket_counter_span' : 'bucket_counter_span Active'}></span>
-                            </div>
+                            </div>}
                             <button className={'header_burger'} onClick={() => setIsBurger(!isBurger)}>=</button>
                         </div>
                         <div className={'header_searcher'}>
@@ -110,7 +114,7 @@ const Header = ({prodo, mainState, mainSetState, getBucket, gotBucket}) => {
                                                     <button className={'plus_toCount_btn'} onClick={() => plusItem(el, el.product_id)}>+</button>
                                                 </div>
                                                 <div className={'product_card_inner_price'}>
-                                                    <span className={'product_card_price'}>{el.product_price}</span>
+                                                    <span className={'product_card_price'}>{el.product_price}$</span>
                                                     <button className={'delete_card_button'} onClick={() => deleteProduct(i)}>убрать</button>
                                                 </div>
                                             </div>
