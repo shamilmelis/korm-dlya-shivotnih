@@ -305,6 +305,7 @@
 .user_adress_location_span i {
     color: red;
 }
+<<<<<<< HEAD
 
 .confirm_order_user_bucket_total {
     display: flex;
@@ -388,3 +389,5 @@
     justify-content: space-between;
 }
 
+=======
+>>>>>>> fbd7eadcd4926eae543a9d46c71238c80513d294
