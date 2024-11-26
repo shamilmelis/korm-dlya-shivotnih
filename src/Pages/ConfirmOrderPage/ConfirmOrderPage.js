@@ -208,7 +208,7 @@ const ConfirmOrderPage = () => {
                                             }, 0)}$</span>
                                         </div>
                                         <div className={'admit_order_block'}>
-                                            <button className={'admit_order_btn'}>Оформить заказ</button>
+                                            <button className={'admit_order_btn'}>Оформить</button>
                                         </div>
                                     </div>
                                 </div>
