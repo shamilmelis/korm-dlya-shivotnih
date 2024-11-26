@@ -17,10 +17,10 @@ const ConfirmOrderPage = () => {
     const [deliveryType, setDeliveryType] = useState(1)
     const navigate = useNavigate();
     const date = new Date();
+    const totalMoney = 0;
 
     const day = date.getDate();
     const month = date.getMonth() + 1
-    const year = date.getFullYear()
     useEffect(() => {
         console.log(bucketItems)
     }, [bucketItems, dispatch])
@@ -183,6 +183,33 @@ const ConfirmOrderPage = () => {
                                                 })
                                             }
                                         </SmoothAppear>
+                                    </div>
+                                    <div className={'confirm_order_user_bucket_total'}>
+                                        {deliveryType === 1 ? <div className={'typeOfDelivery_block'}>
+                                            <span>Доставка</span>
+                                            <span>3$</span>
+                                        </div> : ''}
+                                        <div className={'discount_block'}>
+                                            <span className={'discount_value_span'}>Скидка 0%</span>
+                                            <span className={'discount_value'}>{bucketItems.reduce((sum, product) => {
+                                                return deliveryType === 1 ?  sum + product.product_price + 3 : sum + product.product_price
+                                            }, 0)}$</span>
+                                        </div>
+                                        <div className={'to_pay_block'}>
+                                            <span className={'to_pay_span'}>К оплате</span>
+                                            <span className={'to_pay_value'}>{bucketItems.reduce((sum, product) => {
+                                                return deliveryType === 1 ?  sum + product.product_price + 3 : sum + product.product_price
+                                            }, 0)}$</span>
+                                        </div>
+                                        <div className="total_pay_block">
+                                            <span className={'total_pay_span'}>Итого:</span>
+                                            <span className={'total_pay_value'}>{bucketItems.reduce((sum, product) => {
+                                                return deliveryType === 1 ?  sum + product.product_price + 3 : sum + product.product_price
+                                            }, 0)}$</span>
+                                        </div>
+                                        <div className={'admit_order_block'}>
+                                            <button className={'admit_order_btn'}>Оформить</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

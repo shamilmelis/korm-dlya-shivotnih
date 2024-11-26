@@ -2,10 +2,6 @@
 
 }
 
-* {
-    border: px solid black;
-}
-
 .confirm_order_container {
     max-width: 1200px;
     margin: 0 auto;
@@ -213,12 +209,19 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    padding: 10px;
+    border: 1px solid gainsboro;
 }
-
+.confirm_order_user_bucket_inner::-webkit-scrollbar {width: 0}
 .confirm_order_user_bucket_inner {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    max-height: 400px;
+    min-height: 200px;
+    overflow-y: auto;
 }
 
 .this_order {
@@ -269,8 +272,8 @@
 .to_minus_count_btn {
     cursor: pointer;
     padding: 5px 10px;
+    background: orange;
     border: none;
-    background: #adadc9;
     color: #fff;
     font-family: 'Inter', sans-serif;
     border-radius: 5px;
@@ -285,8 +288,8 @@
 .to_plus_count_btn {
     cursor: pointer;
     padding: 5px 10px;
+    background: orange;
     border: none;
-    background: #adadc9;
     color: #fff;
     font-family: 'Inter', sans-serif;
     border-radius: 5px;
@@ -302,3 +305,86 @@
 .user_adress_location_span i {
     color: red;
 }
+
+.confirm_order_user_bucket_total {
+    display: flex;
+    flex-direction: column;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    padding: 10px;
+    gap: 10px;
+    border: 1px solid gainsboro;
+}
+
+.discount_block {
+    display: flex;
+    justify-content: space-between;
+}
+
+.to_pay_block {
+    display: flex;
+    justify-content: space-between;
+}
+
+.total_pay_block {
+    display: flex;
+    justify-content: space-between;
+}
+
+.discount_value_span {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.discount_value {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.to_pay_span {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.to_pay_value {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.total_pay_span {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.total_pay_value {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.admit_order_block {
+    display: flex;
+}
+
+.admit_order_btn {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background: orange;
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    cursor: pointer;
+}
+
+.typeOfDelivery_block {
+    display: flex;
+    justify-content: space-between;
+}
+
