@@ -1,0 +1,28 @@
+@keyframes loading {
+    0% {display: none; opacity: 1}
+    100% {display: flex; opacity: 1}
+}
+
+@keyframes loadingEnd {
+    0% {display: flex; opacity: 1}
+    100% {display: none; opacity: 0}
+}
+
+.loading_wrapper.Deactivate {
+    animation: loadingEnd 1s forwards;
+}
+.loading_wrapper {
+    animation: loading 1s forwards;
+    position: fixed;
+    display: flex;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    background: orange;
+    justify-content: center;
+    align-items: center;
+}
