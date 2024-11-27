@@ -87,7 +87,7 @@ const ConfirmOrderPage = () => {
                                         <span className={'personal_info_span'}>Личные данные</span>
                                         <div className={'user_fio_inner'}>
                                             <div className={'user_fio_inner_box'}>
-                                                <span className={'information_extra_span'}>Как к вам обращаться?*</span>
+                                                <span className={'information_extra_span'}>Как к вам обращаться?</span>
                                                 <input
                                                     type="text"
                                                     className={'user_info_input'}
