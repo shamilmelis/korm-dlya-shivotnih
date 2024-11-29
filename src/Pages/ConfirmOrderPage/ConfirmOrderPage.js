@@ -21,7 +21,7 @@ const ConfirmOrderPage = () => {
     const day = date.getDate();
     const month = date.getMonth() + 1
     useEffect(() => {
-        console.log(bucketItems)
+
     }, [bucketItems, dispatch])
 
     useEffect(() => {
@@ -30,6 +30,8 @@ const ConfirmOrderPage = () => {
         }
     }, [bucketItems, dispatch, navigate])
     const deleteProduct = (item) => {
+        console.log(item)
+        console.log(bucketItems.filter(el => el.item))
         const newBucket = [...bucketItems]
         newBucket.splice(item, 1)
         dispatch(setBucketData(newBucket))
@@ -156,7 +158,7 @@ const ConfirmOrderPage = () => {
                                         <h3>Ваша корзина</h3>
                                         <div className={'confirm_order_user_bucket_inner'}>
                                             {
-                                                bucketItems.map(item => {
+                                                bucketItems.map((item, index) => {
                                                     return (
                                                         <div className="this_order">
                                                             <img
@@ -165,16 +167,16 @@ const ConfirmOrderPage = () => {
                                                                 className={'this_order_image'}
                                                             />
                                                             <div className={'this_order_info'}>
-                                                                <span className={'this_order_title'}>{item.product_title}</span>
-                                                                <span className={'this_order_price'}>{item.product_price}$</span>
+                                                                <span className={'this_order_title'}>{item.product_title.length > 55 ? item.product_title.slice(0, 55) + '...' : item.product_title}</span>
+                                                                <span className={'this_order_price'}>{item.product_price}{item.product_price_currency}</span>
                                                                 <div className={'this_order_actions'}>
                                                                     <div className={'this_order_count'}>
                                                                         <button className={'to_minus_count_btn'} onClick={() => minusItem(item, item.product_id)}>-</button>
                                                                         <span className={'count_value'}>{item.count}</span>
                                                                         <button className={'to_plus_count_btn'} onClick={() => plusItem(item, item.product_id)}>+</button>
                                                                     </div>
-                                                                    <button className={'delete_this_order_btn'} onClick={() => deleteProduct(item)}>
-                                                                        <i className="fa-solid fa-xmark"></i>
+                                                                    <button className={'delete_this_order_btn'} onClick={() => deleteProduct(index)}>
+                                                                        <i className="fa-solid fa-trash"></i>
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -187,25 +189,25 @@ const ConfirmOrderPage = () => {
                                     <div className={'confirm_order_user_bucket_total'}>
                                         {deliveryType === 1 ? <div className={'typeOfDelivery_block'}>
                                             <span>Доставка</span>
-                                            <span>3$</span>
+                                            <span>300₽</span>
                                         </div> : ''}
                                         <div className={'discount_block'}>
                                             <span className={'discount_value_span'}>Скидка 0%</span>
                                             <span className={'discount_value'}>{bucketItems.reduce((sum, product) => {
-                                                return deliveryType === 1 ?  sum + product.product_price + 3 : sum + product.product_price
-                                            }, 0)}$</span>
+                                                return deliveryType === 1 ?  sum + product.product_price + 300 : sum + product.product_price
+                                            }, 0)}₽</span>
                                         </div>
                                         <div className={'to_pay_block'}>
                                             <span className={'to_pay_span'}>К оплате</span>
                                             <span className={'to_pay_value'}>{bucketItems.reduce((sum, product) => {
-                                                return deliveryType === 1 ?  sum + product.product_price + 3 : sum + product.product_price
-                                            }, 0)}$</span>
+                                                return deliveryType === 1 ?  sum + product.product_price + 300 : sum + product.product_price
+                                            }, 0)}₽</span>
                                         </div>
                                         <div className="total_pay_block">
                                             <span className={'total_pay_span'}>Итого:</span>
                                             <span className={'total_pay_value'}>{bucketItems.reduce((sum, product) => {
-                                                return deliveryType === 1 ?  sum + product.product_price + 3 : sum + product.product_price
-                                            }, 0)}$</span>
+                                                return deliveryType === 1 ?  sum + product.product_price + 300 : sum + product.product_price
+                                            }, 0)}₽</span>
                                         </div>
                                         <div className={'admit_order_block'}>
                                             <button className={'admit_order_btn'}>Оформить</button>

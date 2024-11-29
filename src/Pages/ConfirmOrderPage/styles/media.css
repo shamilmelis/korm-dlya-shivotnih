@@ -10,4 +10,7 @@
     .confirm_order_row {
         flex-wrap: wrap;
     }
+    .user_info_input {
+        font-size: 17px;
+    }
 }

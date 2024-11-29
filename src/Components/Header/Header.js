@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setBucketData} from "../../Redux/slices/dataSlice";
 import {setData} from "../../Redux/slices/dataSlice";
 
-const Header = ({prodo, mainState, mainSetState, getBucket, gotBucket}) => {
+const Header = ({prodo, getBucket, gotBucket}) => {
     const [isBurger, setIsBurger] = useState(false)
     const [isPopup, setIsPopup] = useState(false)
     const [isBucket, setIsBucket] = useState([])
@@ -20,7 +20,6 @@ const Header = ({prodo, mainState, mainSetState, getBucket, gotBucket}) => {
 
     useEffect(() => {
         setIsBucket(prodo)
-        console.log(bucketItems)
     }, [isBucket, prodo, bucketItems])
     const deleteProduct = (i) => {
        const newBucket = [...bucketItems]
@@ -114,7 +113,7 @@ const Header = ({prodo, mainState, mainSetState, getBucket, gotBucket}) => {
                                                     <button className={'plus_toCount_btn'} onClick={() => plusItem(el, el.product_id)}>+</button>
                                                 </div>
                                                 <div className={'product_card_inner_price'}>
-                                                    <span className={'product_card_price'}>{el.product_price}$</span>
+                                                    <span className={'product_card_price'}>{el.product_price}{el.product_price_currency}</span>
                                                     <button className={'delete_card_button'} onClick={() => deleteProduct(i)}>убрать</button>
                                                 </div>
                                             </div>
