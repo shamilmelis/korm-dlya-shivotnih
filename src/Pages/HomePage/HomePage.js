@@ -4,27 +4,24 @@ import '../HomePage/styles/media.css'
 import Header from "../../Components/Header/Header";
 import {useState} from "react";
 import axios from "axios";
+import {styled, keyframes} from "styled-components";
 import ImageUndefined from '../../Components/NoImage/noimages.png';
 import {useSelector, useDispatch} from "react-redux";
-import {setBucketData, setData, setFilteredData} from "../../Redux/slices/dataSlice";
+import {setBucketData, setData} from "../../Redux/slices/dataSlice";
 import LoadingWrapper from "../../Components/LoadingWrapper";
 
 const HomePage = () => {
-    const [minPrice, setMinPrice] = useState(0)
-    const [maxPrice, setMaxPrice] = useState(999999)
-    const [products, setProducts] = useState({
-        product: [],
-        filtered_product: []
-    })
     const [tagsArr, setTagsArr] = useState({
         tags: [],
         priceControl: {
-            min:  0,
-            max:  9999,
+            min:  1,
+            max:  999999,
         }
     })
+    const [products, setProducts] = useState()
+    const [minPrice, setMinPrice] = useState(1)
+    const [maxPrice, setMaxPrice] = useState(999999)
     const [productToBucket, setProductToBucket] = useState([])
-    const [getBucket, isGetBucket] = useState([])
     const [initialItems, setInitialItems] = useState([])
     const [localItems, setLocalItems] = useState()
     const dispatch = useDispatch();
@@ -34,21 +31,18 @@ const HomePage = () => {
         axios.get(`https://66bb06516a4ab5edd636e68d.mockapi.io/tovars`)
             .then(res => {
                 console.log('API =>' , res)
-                setProducts(prevProducts => ({
-                    ...prevProducts,
-                    product: res.data,
-                    filtered_product: res.data
-                }))
                 dispatch(setData(res.data))
                 setInitialItems(res.data)
+                setProducts(res.data)
             })
     }, [])
     useEffect(() => {
         setLocalItems(items)
-    }, [products, bucketItems, dispatch, localItems])
+    }, [items,bucketItems, dispatch, localItems, initialItems, productToBucket])
 
-    const putToBucket = (image,title,price,descr,id, currency) => {
-        productToBucket.push({
+    const putToBucket = (image,title,price,descr,id,currency) => {
+        const newBucket = [...bucketItems]
+        let newItem = {
             product_image: image,
             product_title: title,
             product_descr: descr,
@@ -57,17 +51,11 @@ const HomePage = () => {
             product_id: id,
             product_price_currency: currency,
             count: 1,
-        })
-        const newBucket = [...productToBucket]
-        dispatch(setBucketData(newBucket))
-        setProducts((prevState) => ({
-            ...prevState,
-            product: products.product
-        }))
+        }
+        const currentBucket = [...newBucket, newItem]
+        dispatch(setBucketData(currentBucket))
+        dispatch(setData(items))
     }
-    useEffect(() => {
-
-    }, [productToBucket])
 
     const getTag = (tag, tagId) => {
         let index = tagsArr.tags.indexOf(tagId)
@@ -99,9 +87,9 @@ const HomePage = () => {
         } else {
             const newItems = [...localItems].filter(el => tagsArr.tags.includes(el.category) && el.price >= tagsArr.priceControl.min && el.price <= tagsArr.priceControl.max)
             dispatch(setData(newItems))
-            console.log(newItems)
-            console.log(items)
         }
+        console.log(tagsArr)
+        console.log(items)
     }
 
     const clearAllFilter = () => {
@@ -112,6 +100,8 @@ const HomePage = () => {
         dispatch(setData(initialItems))
         setMinPrice(1)
         setMaxPrice(99999)
+        const allTags = document.querySelectorAll('.tag_checkbox')
+        allTags.forEach(tag => tag.checked = false)
     }
 
     const minF = (e) => {
@@ -134,13 +124,18 @@ const HomePage = () => {
             },
         }));
     }
+
+    const appearEffect = keyframes`
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+    `
+    const AnimatedCol = styled.div`
+        animation: ${appearEffect} 0.5s forwards;
+    `
     return (
         <div>
             <LoadingWrapper></LoadingWrapper>
-            <Header prodo={productToBucket}
-                    getBucket={isGetBucket}
-                    gotBucket={getBucket}
-            ></Header>
+            <Header pro={productToBucket} setPro={setProductToBucket}></Header>
             <main>
                 <section className={'banner_section'}>
                     <div className={'banner_container'}>
@@ -206,9 +201,11 @@ const HomePage = () => {
                                             <span>-</span>
                                             <input type="number" className={'to_filter_input'} value={maxPrice} defaultValue={maxPrice} onChange={(e) => maxF(e.target.value)}/>
                                         </div>
+                                        <div className={'price_filter_actions'}>
+                                            <button onClick={() => filterFunction()} className={'search_byFilter_button'}>Найти</button>
+                                            <button onClick={() => clearAllFilter()} className={'clear_byFilter_button'}>Сбросить</button>
+                                        </div>
                                     </div>
-                                    <button onClick={() => filterFunction()}>Найти</button>
-                                    <button onClick={() => clearAllFilter()}>Сбросить</button>
                                 </div>
                             </div>
                             <div className={'products_col'}>
@@ -216,7 +213,7 @@ const HomePage = () => {
                                     {
                                         items.map(tovar => {
                                             return (
-                                                <div className={'tovar_col'} key={tovar.id}>
+                                                <AnimatedCol className={'tovar_col'} key={tovar.id}>
                                                     <div className="tovar_box">
                                                         <img
                                                             src={tovar.image.length === 0 ? ImageUndefined : tovar.image.map(el => el)}
@@ -228,13 +225,13 @@ const HomePage = () => {
                                                             <p>{tovar.descr}</p>
                                                             <div className={'tovar_price'}>
                                                                 <span>{tovar.price}{tovar.price_currency}</span>
-                                                                <button className={'addToBucket_btn'} disabled={bucketItems.some(el => el.product_id === tovar.id)} onClick={(e) => putToBucket(tovar.image,tovar.title,tovar.price,tovar.descr,tovar.id, tovar.price_currency)}>
+                                                                <button className={'addToBucket_btn'} disabled={bucketItems.some(el => el.product_id === tovar.id)} onClick={() => putToBucket(tovar.image,tovar.title,tovar.price,tovar.descr,tovar.id,tovar.price_currency)}>
                                                                     {bucketItems.some(el => el.product_id === tovar.id) ? 'Добавлено' : 'В корзину'}
                                                                 </button>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </AnimatedCol>
                                             )
                                         })
                                     }

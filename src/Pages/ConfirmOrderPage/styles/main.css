@@ -26,6 +26,7 @@
     cursor: pointer;
     color: orange;
     font-size: 15px;
+    text-decoration: none;
     border-radius: 10px;
 }
 

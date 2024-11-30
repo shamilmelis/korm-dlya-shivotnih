@@ -9,23 +9,21 @@ import {useDispatch, useSelector} from "react-redux";
 import {setBucketData} from "../../Redux/slices/dataSlice";
 import {setData} from "../../Redux/slices/dataSlice";
 
-const Header = ({prodo, getBucket, gotBucket}) => {
+const Header = ({pro, setPro}) => {
     const [isBurger, setIsBurger] = useState(false)
     const [isPopup, setIsPopup] = useState(false)
-    const [isBucket, setIsBucket] = useState([])
     const dispatch = useDispatch();
     const bucketItems = useSelector((state) => state.data.bucketItems)
     const items = useSelector((state) => state.data.items)
     let location = useLocation()
 
     useEffect(() => {
-        setIsBucket(prodo)
-    }, [isBucket, prodo, bucketItems])
+
+    }, [bucketItems, bucketItems, dispatch, pro, setPro])
     const deleteProduct = (i) => {
-       const newBucket = [...bucketItems]
-        newBucket.splice(i, 1)
-        dispatch(setBucketData(newBucket))
-        dispatch(setData(items))
+        const buck = [...bucketItems]
+        buck.splice(i, 1)
+        dispatch(setBucketData(buck))
     }
     const plusItem = (product, id) => {
         // const prevItem = isBucket.map(item => item.product_id === id ? {...item, count: item.count += 1} : item)
@@ -59,9 +57,9 @@ const Header = ({prodo, getBucket, gotBucket}) => {
 
     useEffect(() => {
         if (isPopup === false) {
-            document.body.style.overflow = ''
+            document.querySelector('body').style.overflow = ''
         } else {
-            document.body.style.overflow = 'hidden'
+            document.querySelector('body').style.overflow = 'hidden'
         }
     }, [isPopup])
 
@@ -90,11 +88,12 @@ const Header = ({prodo, getBucket, gotBucket}) => {
                     <div className={'bucket_popup_box'}>
                         <div className={'close_popup'}>
                             <span>Корзина</span>
-                            <button className={'close_popup_btn'} onClick={() => setIsPopup(false)}>x</button>
+                            <button className={'close_popup_btn'} onClick={() => setIsPopup(false)}><i
+                                className="fa-solid fa-xmark"></i></button>
                         </div>
                         <div className="inform_product">
                             {
-                                bucketItems.length === 0 ? 'Добавьте товары!' :
+                                bucketItems.length === 0 ? 'Корзина пуста' :
                                     bucketItems.map((el, i) => {
                                         return (
                                             <div className={'product_card'} key={el.id}>
@@ -114,7 +113,9 @@ const Header = ({prodo, getBucket, gotBucket}) => {
                                                 </div>
                                                 <div className={'product_card_inner_price'}>
                                                     <span className={'product_card_price'}>{el.product_price}{el.product_price_currency}</span>
-                                                    <button className={'delete_card_button'} onClick={() => deleteProduct(i)}>убрать</button>
+                                                    <button className={'delete_card_button'} onClick={() => deleteProduct(i)}>
+                                                        <i className="fa-solid fa-trash"></i>
+                                                    </button>
                                                 </div>
                                             </div>
                                         )
@@ -123,7 +124,7 @@ const Header = ({prodo, getBucket, gotBucket}) => {
 
                         </div>
                         <div className={'confirm_product'}>
-                            {bucketItems.length === 0 ? 'Добавьте товар!' : <Link to={'/confirm-order'} className={'confirm_order_btn'} onClick={() => getBucket(isBucket) && console.log(gotBucket)}>Оформить</Link>}
+                            {bucketItems.length === 0 ? '' : <Link to={'/confirm-order'} className={'confirm_order_btn'}>Оформить</Link>}
                         </div>
                     </div>
                 </div>

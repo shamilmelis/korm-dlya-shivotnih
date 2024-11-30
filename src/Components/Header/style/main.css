@@ -189,8 +189,17 @@ header {
 
 .delete_card_button {
     cursor: pointer;
+    background: none;
+    border: none;
+    padding: 5px 10px;
+    transition: 0.2s;
+    font-size: 18px;
 }
-
+.delete_card_button:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transition: 0.2s;
+    border-radius: 99em;
+}
 .product_card_count {
     display: flex;
     align-items: center;

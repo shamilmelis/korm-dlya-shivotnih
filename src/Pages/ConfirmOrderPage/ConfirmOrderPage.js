@@ -2,6 +2,7 @@ import React from 'react'
 import '../ConfirmOrderPage/styles/main.css'
 import '../ConfirmOrderPage/styles/media.css'
 import Header from "../../Components/Header/Header";
+import {Link} from "react-router-dom";
 import {useState, useEffect} from "react";
 import {setBucketData, setData, setFilteredData} from "../../Redux/slices/dataSlice";
 import {useDispatch, useSelector} from "react-redux";
@@ -78,7 +79,7 @@ const ConfirmOrderPage = () => {
                     <div className="confirm_order_container">
                         <div className="confirm_order_box">
                             <div className={'navigate_routes_block'}>
-                                <button onClick={() => navigate('/')} className={'back_to_previous_page_btn'}>Главная</button>
+                                <Link to={'/'} className={'back_to_previous_page_btn'}>Главная</Link>
                                 /
                                 <button onClick={() => navigate('/confirm-order')} className={'back_to_previous_page_btn'}>Оформление заказа</button>
                             </div>
@@ -192,22 +193,22 @@ const ConfirmOrderPage = () => {
                                             <span>300₽</span>
                                         </div> : ''}
                                         <div className={'discount_block'}>
-                                            <span className={'discount_value_span'}>Скидка 0%</span>
+                                            <span className={'discount_value_span'}>Скидка 10%</span>
                                             <span className={'discount_value'}>{bucketItems.reduce((sum, product) => {
-                                                return deliveryType === 1 ?  sum + product.product_price + 300 : sum + product.product_price
+                                                return (sum + product.product_price) / 100 * 10
                                             }, 0)}₽</span>
                                         </div>
                                         <div className={'to_pay_block'}>
                                             <span className={'to_pay_span'}>К оплате</span>
                                             <span className={'to_pay_value'}>{bucketItems.reduce((sum, product) => {
-                                                return deliveryType === 1 ?  sum + product.product_price + 300 : sum + product.product_price
+                                                return sum + product.product_price
                                             }, 0)}₽</span>
                                         </div>
                                         <div className="total_pay_block">
                                             <span className={'total_pay_span'}>Итого:</span>
                                             <span className={'total_pay_value'}>{bucketItems.reduce((sum, product) => {
-                                                return deliveryType === 1 ?  sum + product.product_price + 300 : sum + product.product_price
-                                            }, 0)}₽</span>
+                                                return (sum + product.product_price) - ((sum + product.product_price) / 100 * 10)
+                                            }, 0) + (deliveryType === 1 ? 300 : 0)}₽</span>
                                         </div>
                                         <div className={'admit_order_block'}>
                                             <button className={'admit_order_btn'}>Оформить</button>
