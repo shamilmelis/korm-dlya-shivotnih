@@ -1,3 +1,9 @@
+@media screen and (max-width: 760px) {
+    .tovar_col {
+        flex-basis: 50%;
+    }
+}
+
 @media screen and (max-width: 700px) {
     .filter_and_products_box {
         flex-wrap: wrap;
@@ -8,10 +14,26 @@
     .products_col {
         width: 100%;
     }
+    .tovar_col {
+        flex-basis: 33.333%;
+    }
 }
 
-@media screen and (max-width: 490px) {
+@media screen and (max-width: 540px) {
     .tovar_col {
         flex-basis: 50%;
+    }
+}
+
+@media screen and (min-width: 500px) {
+    .tovar_col.listMode {
+        flex-basis: 100%;
+    }
+    .tovar_box.listMode {
+        flex-direction: row;
+    }
+    .tovar_img.listMode {
+        width: 120px;
+        height: 120px;
     }
 }

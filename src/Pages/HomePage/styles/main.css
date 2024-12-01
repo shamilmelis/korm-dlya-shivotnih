@@ -42,8 +42,11 @@
     padding: 10px;
 }
 .products_col {
+    display: flex;
+    flex-direction: column;
     width: 70%;
     padding: 5px;
+    gap: 10px;
 }
 
 .filter_box {
@@ -144,6 +147,34 @@
     font-size: 13px;
 }
 
+.products_shape_block {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1px;
+}
+
+.list_shape_btn {
+    border: 1px solid gainsboro;
+    background: none;
+    cursor: pointer;
+}
+
+.selected_shape {
+    color: #000;
+    transition: 0.2s;
+    padding: 10px;
+}
+.selected_shape.Selected {
+    color: orange;
+    transition: 0.2s;
+}
+
+.col_shape_btn {
+    border: 1px solid gainsboro;
+    background: none;
+    cursor: pointer;
+}
+
 .products_box {
     display: flex;
     flex-wrap: wrap;
@@ -153,14 +184,13 @@
 .tovar_col {
     flex-basis: 33.333%;
     transition: 1s;
-    padding: 1px;
 }
 .tovar_box {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 10px;
     height: 100%;
+    padding: 10px;
     border: 1px solid gainsboro;
 }
 
@@ -168,7 +198,15 @@
     display: block;
     margin: 0 auto;
     width: 100%;
-    height: auto;
+    object-fit: cover;
+    height: 220px;
+}
+
+.tovar_title {
+    font-size: 14px;
+}
+.tovar_descr {
+    font-size: 12px;
 }
 
 .tovar_inform {
@@ -188,6 +226,10 @@
 .addToBucket_btn.Added {
     background: gray;
 }
+.addToBucket_btn.Added {
+    background: gray;
+    transition: 0.2s;
+}
 .addToBucket_btn {
     border: none;
     padding: 10px;
@@ -195,4 +237,6 @@
     background: orange;
     border-radius: 5px;
     cursor: pointer;
+    transition: 0.2s;
+    font-size: 13px;
 }

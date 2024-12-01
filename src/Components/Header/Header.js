@@ -8,6 +8,7 @@ import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {setBucketData} from "../../Redux/slices/dataSlice";
 import {setData} from "../../Redux/slices/dataSlice";
+import {useParams} from "react-router";
 
 const Header = ({pro, setPro}) => {
     const [isBurger, setIsBurger] = useState(false)
@@ -15,6 +16,8 @@ const Header = ({pro, setPro}) => {
     const dispatch = useDispatch();
     const bucketItems = useSelector((state) => state.data.bucketItems)
     const items = useSelector((state) => state.data.items)
+    let params = useParams()
+    const [search, setSearch] = useState('')
     let location = useLocation()
 
     useEffect(() => {
@@ -78,8 +81,8 @@ const Header = ({pro, setPro}) => {
                             <button className={'header_burger'} onClick={() => setIsBurger(!isBurger)}>=</button>
                         </div>
                         <div className={'header_searcher'}>
-                            <input type="text" placeholder={'Найти товар'} className={'search_input'}/>
-                            <button className={'search_button'}>найти</button>
+                            <input type="text" placeholder={'Найти товар'} onChange={(e) => setSearch(e.target.value)} className={'search_input'}/>
+                            {search ? <Link to={`/search/${search}`} className={'search_button'}>найти</Link> : <button className={'search_button'}>найти</button>}
                         </div>
                     </div>
                 </div>

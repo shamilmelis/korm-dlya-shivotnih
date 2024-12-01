@@ -27,6 +27,8 @@ const HomePage = () => {
     const dispatch = useDispatch();
     const items = useSelector((state) => state.data.items)
     const bucketItems = useSelector((state) => state.data.bucketItems)
+
+    const [listMode, setListMode] = useState(false)
     useEffect(() => {
         axios.get(`https://66bb06516a4ab5edd636e68d.mockapi.io/tovars`)
             .then(res => {
@@ -55,6 +57,7 @@ const HomePage = () => {
         const currentBucket = [...newBucket, newItem]
         dispatch(setBucketData(currentBucket))
         dispatch(setData(items))
+        console.log(items)
     }
 
     const getTag = (tag, tagId) => {
@@ -71,25 +74,45 @@ const HomePage = () => {
 
     }, [items, tagsArr.tags, tagsArr, minPrice, maxPrice])
     const filterFunction = () => {
-        if (tagsArr.tags.length === 0) {
-            dispatch(setData(initialItems))
-            if (minPrice || maxPrice) {
-                if (tagsArr.tags.length === 0) {
-                    const newItems = [...localItems].filter(el => el.price >= tagsArr.priceControl.min && el.price <= tagsArr.priceControl.max)
-                    dispatch(setData(newItems))
-                } else {
-                    const newItems = [...localItems].filter(el => tagsArr.tags.includes(el.category))
+        // if (tagsArr.tags.length === 0) {
+        //     dispatch(setData(initialItems))
+        //     if (minPrice || maxPrice) {
+        //         if (tagsArr.tags.length === 0) {
+        //             const newItems = [...localItems].filter(el => el.price >= tagsArr.priceControl.min && el.price <= tagsArr.priceControl.max)
+        //             dispatch(setData(newItems))
+        //         } else {
+        //             const newItems = [...localItems].filter(el => tagsArr.tags.includes(el.category))
+        //             dispatch(setData(newItems))
+        //         }
+        //     } else {
+        //         dispatch(setData(localItems))
+        //     }
+        // } else {
+        //     const newItems = [...localItems].filter(el => tagsArr.tags.includes(el.category) && el.price >= tagsArr.priceControl.min && el.price <= tagsArr.priceControl.max)
+        //     dispatch(setData(newItems))
+        // }
+        // console.log(tagsArr)
+        // console.log(items)
+
+        if (!tagsArr.tags.length) {
+            const newItems = initialItems.filter(item => item.price >= tagsArr.priceControl.min && item.price <= tagsArr.priceControl.max)
+            dispatch(setData(newItems))
+            if (tagsArr.tags.length > 0) {
+                const newItems = initialItems.filter(item => tagsArr.tags.includes(item.category))
+                dispatch(setData(newItems))
+                if (minPrice && maxPrice) {
+                    const newItems = initialItems.filter(item => tagsArr.tags.includes(item.category) && item.price >= tagsArr.priceControl.min && item.price <= tagsArr.priceControl.max)
                     dispatch(setData(newItems))
                 }
-            } else {
-                dispatch(setData(localItems))
             }
-        } else {
-            const newItems = [...localItems].filter(el => tagsArr.tags.includes(el.category) && el.price >= tagsArr.priceControl.min && el.price <= tagsArr.priceControl.max)
+        } else if (tagsArr.tags.length > 0) {
+            const newItems = initialItems.filter(item => tagsArr.tags.includes(item.category))
             dispatch(setData(newItems))
+            if (minPrice && maxPrice) {
+                const newItems = initialItems.filter(item => tagsArr.tags.includes(item.category) && item.price >= tagsArr.priceControl.min && item.price <= tagsArr.priceControl.max)
+                dispatch(setData(newItems))
+            }
         }
-        console.log(tagsArr)
-        console.log(items)
     }
 
     const clearAllFilter = () => {
@@ -209,23 +232,31 @@ const HomePage = () => {
                                 </div>
                             </div>
                             <div className={'products_col'}>
+                                <div className={'products_shape_block'}>
+                                    <button className={'list_shape_btn'} onClick={() => setListMode(true)}>
+                                        <i className={listMode === true ? 'fa-solid fa-list selected_shape Selected' : 'fa-solid fa-list selected_shape'}></i>
+                                    </button>
+                                    <button className={'col_shape_btn'} onClick={() => setListMode(false)}>
+                                        <i className={listMode === false ? 'fa-solid fa-columns selected_shape Selected' : 'fa-solid fa-columns selected_shape'}></i>
+                                    </button>
+                                </div>
                                 <div className={'products_box'}>
                                     {
                                         items.map(tovar => {
                                             return (
-                                                <AnimatedCol className={'tovar_col'} key={tovar.id}>
-                                                    <div className="tovar_box">
+                                                <AnimatedCol className={listMode === false ? 'tovar_col' : 'tovar_col listMode'} key={tovar.id}>
+                                                    <div className={listMode === false ? 'tovar_box' : 'tovar_box listMode'}>
                                                         <img
                                                             src={tovar.image.length === 0 ? ImageUndefined : tovar.image.map(el => el)}
                                                             alt=""
-                                                            className={'tovar_img'}
+                                                            className={listMode === false ? 'tovar_img' : 'tovar_img listMode'}
                                                         />
                                                         <div className={'tovar_inform'}>
-                                                            <span>{tovar.title.length > 50 ? tovar.title.slice(0, 50) + '...' : tovar.title}</span>
-                                                            <p>{tovar.descr}</p>
+                                                            <span className={'tovar_title'}>{tovar.title.length > 50 ? tovar.title.slice(0, 50) + '...' : tovar.title}</span>
+                                                            <p className={'tovar_descr'}>{tovar.descr}</p>
                                                             <div className={'tovar_price'}>
                                                                 <span>{tovar.price}{tovar.price_currency}</span>
-                                                                <button className={'addToBucket_btn'} disabled={bucketItems.some(el => el.product_id === tovar.id)} onClick={() => putToBucket(tovar.image,tovar.title,tovar.price,tovar.descr,tovar.id,tovar.price_currency)}>
+                                                                <button className={bucketItems.some(el => el.product_id === tovar.id) ? 'addToBucket_btn Added' : 'addToBucket_btn'} disabled={bucketItems.some(el => el.product_id === tovar.id)} onClick={() => putToBucket(tovar.image,tovar.title,tovar.price,tovar.descr,tovar.id,tovar.price_currency)}>
                                                                     {bucketItems.some(el => el.product_id === tovar.id) ? 'Добавлено' : 'В корзину'}
                                                                 </button>
                                                             </div>

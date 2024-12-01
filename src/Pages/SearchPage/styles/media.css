@@ -1,0 +1,11 @@
+@media screen and (max-width: 800px) {
+    .search_col {
+        flex-basis: 33.333%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .search_col {
+        flex-basis: 50%;
+    }
+}
