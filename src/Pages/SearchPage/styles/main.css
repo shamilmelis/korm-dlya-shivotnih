@@ -20,6 +20,7 @@
 
 .result_search_block {
     display: flex;
+    align-items: center;
     gap: 10px;
 }
 
@@ -30,6 +31,11 @@
     font-size: 15px;
 }
 
+.explored_count {
+    font-size: 17px;
+    color: orange;
+}
+
 .current_page_btn {
     font-size: 15px;
     color: orange;
@@ -37,12 +43,20 @@
 
 .search_row {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .search_col {
+    position: relative;
     flex-basis: 25%;
 }
 
+.product_link {
+    text-decoration: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
 
 .search_block {
     display: flex;

@@ -1,0 +1,32 @@
+@media screen and (max-width: 700px) {
+    .big_image_col {
+        flex-basis: 100%;
+    }
+    .about_product_inner {
+        flex-wrap: wrap;
+    }
+    .big_image {
+        max-width: 300px;
+    }
+    .product_info_col {
+        flex-basis: 100%;
+    }
+    .product_title {
+        font-size: 20px;
+    }
+    .descr_p {
+        font-size: 11px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .big_image {
+        max-width: 200px;
+    }
+    .product_title {
+        font-size: 15px;
+    }
+    .descr_p {
+        font-size: 11px;
+    }
+}

@@ -12,17 +12,19 @@ import LoadingWrapper from "../../Components/LoadingWrapper";
 const SearchPage = () => {
     const {search} = useParams()
     const [item, setItem] = useState([])
-
+    const [filtered, setFiltered] = useState([])
     useEffect(() => {
-        axios.get(`https://66bb06516a4ab5edd636e68d.mockapi.io/tovars?title=${search}`)
+        axios.get(`https://66bb06516a4ab5edd636e68d.mockapi.io/tovars`)
             .then(res => {
                 setItem(res.data)
+                setFiltered(item)
             })
-            .catch(err => setItem([]))
-    }, [search])
+            .catch(err => console.log(err))
+    }, [])
     useEffect(() => {
-        console.log(item)
-    }, [item, search])
+        const exploredItems = item.filter(el => el.title.toLowerCase().includes(search.toLowerCase()));
+        setFiltered(exploredItems);
+    }, [item, search]);
 
     const appearEffect = keyframes`
         0% {opacity: 0;}
@@ -46,17 +48,18 @@ const SearchPage = () => {
                             </div>
                             <div className={'result_search_block'}>
                                 <span>найдено:</span>
-                                <span>{item.length > 0 ? item.length : 0}</span>
+                                <span className={'explored_count'}>{filtered.length > 0 ? filtered.length : 0}</span>
                             </div>
                             <div className="search_row">
                                 {
-                                        item.map(el => {
+                                        filtered.map(el => {
                                             return (
                                                 <AnimatedCol className="search_col">
+                                                    <Link to={`/products/ID/${el.id}`} className={'product_link'}></Link>
                                                     <div className="search_block">
                                                         <img src={el.image.length === 0 ? ImageUndefined : el.image.map(el => el)} alt="" className={'product_image'}/>
                                                         <div className={'search_block_info'}>
-                                                            <span className={'product_title'}>{el.title}</span>
+                                                            <span className={'product_title'}>{el.title.length > 50 ? el.title.slice(0,50) + '...' : el.title}</span>
                                                             <p className={'product_descr'}>{el.descr}</p>
                                                         </div>
                                                     </div>
