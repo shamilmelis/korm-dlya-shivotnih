@@ -12,9 +12,32 @@
     flex-direction: column;
 }
 
+.navigate_routes_block {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.back_to_previous_page_btn {
+    background: none;
+    border: none;
+    color: orange;
+    font-size: 15px;
+}
+
 .about_product_inner {
     display: flex;
     gap: 10px;
+}
+
+.item_title_block {
+    display: flex;
+    padding: 10px 0;
+}
+
+.product_title {
+    font-size: 20px;
+    font-weight: 700;
 }
 
 .big_image_col {
@@ -42,24 +65,190 @@
     padding: 10px;
     display: flex;
     flex-direction: column;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     height: 100%;
     border-radius: 10px;
-    gap: 10px;
+    gap: 30px;
 }
 
-.product_title {
-    font-size: 25px;
-    font-weight: 400;
+.item_title_block_mobile {
+    display: none;
 }
 
-.descr_block {
+.product_title_mobile {
+    font-size: 18px;
+}
+
+.to_bucket_block {
     display: flex;
-    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid gainsboro;
+    border-radius: 1em;
+    padding: 15px;
+}
+
+.item_price {
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.to_bucket_btn {
+    background: orange;
+    border: none;
+    border-radius: 1em;
+    padding: 15px 50px;
+    font-size: 14px;
+    color: #000;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.to_bucket_btn.Added {
+    background: green;
+    transition: 0.2s;
+    color: #fff;
+}
+
+.item_features_block {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.item_features_inner {
+    display: flex;
+    gap: 20px;
+    border-top: 1px solid gainsboro;
+    padding: 15px 0;
+}
+
+.item_features_col {
+    display: flex;
     flex-direction: column;
 }
 
-.descr_p {
-    font-size: 13px;
+.item_features_title {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.kal_value {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.kal_span {
+    font-size: 14px;
+    color: gray;
+}
+
+.protein_value {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.protein_span {
+    font-size: 14px;
+    color: gray;
+}
+
+.fat_value {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.fat_span {
+    font-size: 14px;
+    color: gray;
+}
+
+.carbohydrate_value {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.carbohydrate_span {
+    font-size: 14px;
+    color: gray;
+}
+
+.item_info_block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item_info_title_block {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid gainsboro;
+    padding-bottom: 20px;
+}
+
+
+.item_info_inner {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px 0;
+}
+
+
+.item_info_title {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.item_descr_span {
+    font-size: 14px;
     font-weight: 300;
+    color: gray;
+}
+
+.item_descr_value {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.item_lineup_span {
+    font-size: 14px;
+    font-weight: 300;
+    color: gray;
+}
+
+.item_lineup_value {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.item_storage_span {
+    font-size: 14px;
+    font-weight: 300;
+    color: gray;
+}
+
+.item_storage_value {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.item_production_span {
+    font-size: 14px;
+    font-weight: 300;
+    color: gray;
+}
+
+.item_production_value {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.item_brand_span {
+    font-size: 14px;
+    font-weight: 300;
+    color: gray;
+}
+
+.item_brand_value {
+    font-size: 14px;
+    font-weight: 500;
 }

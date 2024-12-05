@@ -73,12 +73,14 @@ const Header = ({pro, setPro}) => {
                 <div className={'header_container'}>
                     <div className={isBurger === false ? 'header_box' : 'header_box Active'}>
                         <div className={'header_logo'}>
-                            <h1 className={'header_title'}>AnimalMEAL</h1>
+                            <Link to={'/'} className={'header_title'}>AnimalMEAL</Link>
                             {location.pathname === '/confirm-order' ? '' : <div className={'bucket_counter'}>
                                 <button className={'bucket_btn'} onClick={() => setIsPopup(true)}><i className="fa-solid fa-cart-shopping"></i></button>
                                 <span className={bucketItems.length === 0 ? 'bucket_counter_span' : 'bucket_counter_span Active'}></span>
                             </div>}
-                            <button className={'header_burger'} onClick={() => setIsBurger(!isBurger)}>=</button>
+                            <button className={'header_burger'} onClick={() => setIsBurger(!isBurger)}>
+                                <i className="fa-solid fa-bars"></i>
+                            </button>
                         </div>
                         <div className={'header_searcher'}>
                             <input type="text" placeholder={'Найти товар'} onChange={(e) => setSearch(e.target.value)} className={'search_input'}/>

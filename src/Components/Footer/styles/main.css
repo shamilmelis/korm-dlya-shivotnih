@@ -1,0 +1,38 @@
+.footer_section {
+    background: gainsboro;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+.footer_container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer_block {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.footer_title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    text-decoration: none;
+    color: #000;
+}
+
+.footer_block_inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+}
+.footer_block_copyrights {
+    display: flex;
+    gap: 15px;
+}
+
+.footer_block_author {
+    display: flex;
+}

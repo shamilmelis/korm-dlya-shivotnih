@@ -6,7 +6,7 @@
         flex-wrap: wrap;
     }
     .big_image {
-        max-width: 300px;
+        width: 70%;
     }
     .product_info_col {
         flex-basis: 100%;
@@ -17,16 +17,28 @@
     .descr_p {
         font-size: 11px;
     }
+    .navigate_routes_block {
+        display: none;
+    }
+    .about_product_section {
+        padding: 10px 5px;
+    }
+    .item_title_block {
+        display: none;
+    }
+    .item_title_block_mobile {
+        display: flex;
+    }
 }
 
 @media screen and (max-width: 500px) {
-    .big_image {
-        max-width: 200px;
-    }
     .product_title {
         font-size: 15px;
     }
     .descr_p {
         font-size: 11px;
+    }
+    .item_price {
+        font-size: 20px;
     }
 }

@@ -4,8 +4,8 @@
     box-sizing: border-box;
 }
 
-.banner_section {
-
+main {
+    flex-grow: 1;
 }
 
 .banner_container {
@@ -182,9 +182,19 @@
 
 
 .tovar_col {
+    position: relative;
     flex-basis: 33.333%;
     transition: 1s;
 }
+
+.product_link {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    text-decoration: none;
+}
+
 .tovar_box {
     display: flex;
     flex-direction: column;
@@ -224,13 +234,11 @@
     flex-grow: 1;
 }
 .addToBucket_btn.Added {
-    background: gray;
-}
-.addToBucket_btn.Added {
-    background: gray;
+    background: green;
     transition: 0.2s;
 }
 .addToBucket_btn {
+    z-index: 99;
     border: none;
     padding: 10px;
     color: #fff;

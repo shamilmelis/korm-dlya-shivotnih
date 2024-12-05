@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import ImageUndefined from '../../Components/NoImage/noimages.png';
 import {useNavigate} from "react-router-dom";
 import LoadingWrapper from "../../Components/LoadingWrapper";
+import Footer from "../../Components/Footer";
 
 const ConfirmOrderPage = () => {
     const bucketItems = useSelector((state) => state.data.bucketItems)
@@ -71,7 +72,7 @@ const ConfirmOrderPage = () => {
     }
 
     return (
-        <div>
+        <div className={'website_wrapper'}>
             <LoadingWrapper></LoadingWrapper>
             <Header></Header>
             <main>
@@ -80,7 +81,7 @@ const ConfirmOrderPage = () => {
                         <div className="confirm_order_box">
                             <div className={'navigate_routes_block'}>
                                 <Link to={'/'} className={'back_to_previous_page_btn'}>Главная</Link>
-                                /
+                                <span>></span>
                                 <button onClick={() => navigate('/confirm-order')} className={'back_to_previous_page_btn'}>Оформление заказа</button>
                             </div>
                             <div className="confirm_order_row">
@@ -128,7 +129,7 @@ const ConfirmOrderPage = () => {
                                                     <div className={'user_place_inner_list_box'}>
                                                         <span className={deliveryType === 0 ? 'typeOfDelivery_span' : 'typeOfDelivery_span Disabled'}>Самовывоз</span>
                                                         <span className={deliveryType === 0 ? 'priceOfDelivery_span' : 'priceOfDelivery_span Disabled'}>Бесплатно</span>
-                                                        <span className={deliveryType === 0 ? 'timeOfDelivery_span' : 'timeOfDelivery_span Disabled'}>Сегодня после 16:00 по адресу г.Бишкек, Исанова 145</span>
+                                                        <span className={deliveryType === 0 ? 'timeOfDelivery_span' : 'timeOfDelivery_span Disabled'}>Сегодня после 16:00 по адресу г.Москва</span>
                                                     </div>
                                                 </div>
                                                 <div className="user_place_inner_list">
@@ -148,7 +149,7 @@ const ConfirmOrderPage = () => {
                                                 <span className={'user_adress_location_span'}>
                                                     <i className="fa-solid fa-location-dot"></i>
                                                 </span>
-                                                <span className={'user_city_span'}>Бишкек</span>
+                                                <span className={'user_city_span'}>Москва</span>
                                                 <button className={'change_city_btn'}>изменить город</button>
                                             </div>
                                         </div>
@@ -220,6 +221,7 @@ const ConfirmOrderPage = () => {
                     </div>
                 </section>
             </main>
+            <Footer></Footer>
         </div>
     )
 }

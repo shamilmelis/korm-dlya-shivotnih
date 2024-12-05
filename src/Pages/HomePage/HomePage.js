@@ -9,6 +9,8 @@ import ImageUndefined from '../../Components/NoImage/noimages.png';
 import {useSelector, useDispatch} from "react-redux";
 import {setBucketData, setData} from "../../Redux/slices/dataSlice";
 import LoadingWrapper from "../../Components/LoadingWrapper";
+import Footer from "../../Components/Footer";
+import {Link} from "react-router-dom";
 
 const HomePage = () => {
     const [tagsArr, setTagsArr] = useState({
@@ -156,7 +158,7 @@ const HomePage = () => {
         animation: ${appearEffect} 0.5s forwards;
     `
     return (
-        <div>
+        <div className={'website_wrapper'}>
             <LoadingWrapper></LoadingWrapper>
             <Header pro={productToBucket} setPro={setProductToBucket}></Header>
             <main>
@@ -245,6 +247,7 @@ const HomePage = () => {
                                         items.map(tovar => {
                                             return (
                                                 <AnimatedCol className={listMode === false ? 'tovar_col' : 'tovar_col listMode'} key={tovar.id}>
+                                                    <Link to={`/product/ID/${tovar.id}`} className={'product_link'}></Link>
                                                     <div className={listMode === false ? 'tovar_box' : 'tovar_box listMode'}>
                                                         <img
                                                             src={tovar.image.length === 0 ? ImageUndefined : tovar.image.map(el => el)}
@@ -272,6 +275,7 @@ const HomePage = () => {
                     </div>
                 </section>
             </main>
+            <Footer></Footer>
         </div>
     )
 }

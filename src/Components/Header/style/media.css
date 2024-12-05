@@ -5,6 +5,7 @@
         max-height: 80px;
         overflow: hidden;
         transition: all 500ms ease;
+        padding: 20px 15px;
     }
     .header_box.Active {
         max-height: 300px;

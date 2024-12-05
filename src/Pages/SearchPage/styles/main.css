@@ -49,6 +49,7 @@
 .search_col {
     position: relative;
     flex-basis: 25%;
+    padding: 1px;
 }
 
 .product_link {
@@ -81,10 +82,10 @@
     gap: 10px;
 }
 
-.product_title {
-    font-size: 14px;
+.item_title {
+    font-size: 15px;
 }
 
-.product_descr {
+.item_descr {
     font-size: 12px;
 }

@@ -9,6 +9,7 @@ import {useParams} from "react-router";
 import {styled, keyframes} from "styled-components";
 import axios from "axios";
 import LoadingWrapper from "../../Components/LoadingWrapper";
+import Footer from "../../Components/Footer";
 const SearchPage = () => {
     const {search} = useParams()
     const [item, setItem] = useState([])
@@ -34,7 +35,7 @@ const SearchPage = () => {
         animation: ${appearEffect} 0.5s forwards;
     `
     return (
-        <div>
+        <div className={'website_wrapper'}>
             <LoadingWrapper></LoadingWrapper>
             <Header></Header>
             <main>
@@ -43,7 +44,7 @@ const SearchPage = () => {
                         <div className="search_box">
                             <div className={'navigate_routes_block'}>
                                 <Link to={'/'} className={'back_to_previous_page_btn'}>Главная</Link>
-                                /
+                                <span>></span>
                                 <span className={'current_page_btn'}>Поиск</span>
                             </div>
                             <div className={'result_search_block'}>
@@ -55,12 +56,12 @@ const SearchPage = () => {
                                         filtered.map(el => {
                                             return (
                                                 <AnimatedCol className="search_col">
-                                                    <Link to={`/products/ID/${el.id}`} className={'product_link'}></Link>
+                                                    <Link to={`/product/ID/${el.id}`} className={'product_link'}></Link>
                                                     <div className="search_block">
                                                         <img src={el.image.length === 0 ? ImageUndefined : el.image.map(el => el)} alt="" className={'product_image'}/>
                                                         <div className={'search_block_info'}>
-                                                            <span className={'product_title'}>{el.title.length > 50 ? el.title.slice(0,50) + '...' : el.title}</span>
-                                                            <p className={'product_descr'}>{el.descr}</p>
+                                                            <span className={'item_title'}>{el.title.length > 50 ? el.title.slice(0,50) + '...' : el.title}</span>
+                                                            <p className={'item_descr'}>{el.descr}</p>
                                                         </div>
                                                     </div>
                                                 </AnimatedCol>
@@ -72,6 +73,7 @@ const SearchPage = () => {
                     </div>
                 </div>
             </main>
+            <Footer></Footer>
         </div>
     )
 }

@@ -107,7 +107,6 @@ header {
 .header_container {
     max-width: 1200px;
     margin: 0 auto;
-    border: 1px solid gainsboro;
 }
 
 .header_box {
@@ -125,6 +124,8 @@ header {
 .header_title {
     font-family: 'Montserrat', sans-serif;
     font-size: 30px;
+    text-decoration: none;
+    color: #000;
 }
 
 .bucket_counter {
@@ -157,7 +158,11 @@ header {
 
 .header_burger {
     display: none;
+    border: none;
+    background: none;
+    font-size: 20px;
 }
+
 
 .header_searcher {
     display: flex;
