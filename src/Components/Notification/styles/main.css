@@ -1,0 +1,47 @@
+.notification_box {
+    display: flex;
+    z-index: 999;
+}
+
+.notification_inner {
+    display: flex;
+    gap: 10px;
+    width: 300px;
+    height: auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    position: relative;
+}
+
+.notification_info {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.notif_title {
+    font-size: 14px;
+    color: #000;
+}
+
+.notif_bar {
+    width: 10px;
+    background: orange;
+}
+
+.notif_progress_bar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 96%;
+    padding: 1px;
+    background: #000;
+    border-radius: 8px;
+    animation: barLeaved 5s forwards;
+}
+
+@keyframes barLeaved {
+    0% {width: 96%}
+    100% {width: 0}
+}

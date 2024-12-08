@@ -11,6 +11,7 @@ import {setBucketData, setData} from "../../Redux/slices/dataSlice";
 import LoadingWrapper from "../../Components/LoadingWrapper";
 import Footer from "../../Components/Footer";
 import {Link} from "react-router-dom";
+import Notification from "../../Components/Notification";
 
 const HomePage = () => {
     const [tagsArr, setTagsArr] = useState({
@@ -29,6 +30,7 @@ const HomePage = () => {
     const dispatch = useDispatch();
     const items = useSelector((state) => state.data.items)
     const bucketItems = useSelector((state) => state.data.bucketItems)
+    const [notifications, setNotifications] = useState([])
 
     const [listMode, setListMode] = useState(false)
     useEffect(() => {
@@ -45,6 +47,8 @@ const HomePage = () => {
     }, [items,bucketItems, dispatch, localItems, initialItems, productToBucket])
 
     const putToBucket = (image,title,price,descr,id,currency) => {
+        let ID = Date.now()
+        let notific = {ID, message: 'новое уведомление'}
         const newBucket = [...bucketItems]
         let newItem = {
             product_image: image,
@@ -60,6 +64,10 @@ const HomePage = () => {
         dispatch(setBucketData(currentBucket))
         dispatch(setData(items))
         console.log(items)
+        setTimeout(() => {
+            setNotifications((prev) => prev.filter(el => el.ID !== ID))
+        }, 5000)
+        setNotifications((prev) => [...prev, notific])
     }
 
     const getTag = (tag, tagId) => {
@@ -75,6 +83,9 @@ const HomePage = () => {
     useEffect(() => {
 
     }, [items, tagsArr.tags, tagsArr, minPrice, maxPrice])
+    useEffect(() => {
+
+    }, [notifications])
     const filterFunction = () => {
         // if (tagsArr.tags.length === 0) {
         //     dispatch(setData(initialItems))
@@ -157,9 +168,22 @@ const HomePage = () => {
     const AnimatedCol = styled.div`
         animation: ${appearEffect} 0.5s forwards;
     `
+
     return (
         <div className={'website_wrapper'}>
             <LoadingWrapper></LoadingWrapper>
+            <div className={'notifications_wrapper'}>
+                {
+                    notifications.length === 0 ? '' :
+                        notifications.map((el) => {
+                            return (
+                                <Notification key={el.ID}>
+                                    {el.message}
+                                </Notification>
+                            )
+                        })
+                }
+            </div>
             <Header pro={productToBucket} setPro={setProductToBucket}></Header>
             <main>
                 <section className={'banner_section'}>
